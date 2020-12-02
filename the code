@@ -1,0 +1,51 @@
+#include <iostream>
+#include <time.h>
+#include <chrono>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+
+int main(){
+
+    int numar, incercari = 0, ghicit;
+    char ready;
+
+    srand(chrono::duration_cast<chrono::milliseconds>(chrono::system_clock::now().time_since_epoch()).count());
+    numar = rand()%1000 - 500; //calculatorul alege un numar random intre -500 si 500
+    //cout << numar << endl;
+
+    do{
+        cout << "Esti gata ? (y/n) \n\n"; //daca vrei sa joci jocul sau nu
+        cin >> ready;
+
+        if(ready == 'y'){
+            do{
+                cout << "incearca un numar intre -500 si 500: ";
+                cin >> ghicit; //se citeste numarul utilizatorului
+                incercari++;
+
+                if(incercari == 10){  //daca nr de incercari a ajuns la 10 se termina jocul
+                    cout <<"N-ai avut noroc prietene, mai baga o fisa" << endl;
+                    return 0;
+
+                }
+
+                if(ghicit > numar) //verifica numarul
+                    cout << "Prea mare!\n\n";
+
+                else if(ghicit < numar) //verifica numarul
+                    cout << "Prea mic!\n\n";
+                else
+                    cout << "\nBravo ai ghici numaru in: " << incercari << " incercari!\n";
+            }while(ghicit != numar);
+
+        }
+        else{
+            cout << "Ne jucam alta data, PA!";
+            return 0;
+        }
+    }while(ready != 'y');
+
+    return 0;
+}
